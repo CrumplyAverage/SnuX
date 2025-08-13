@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Snux</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#121212" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Snux">
+
+  <link rel="icon" href="assets/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <noscript>This app requires JavaScript to run.</noscript>
+
+  <!-- Splash -->
+  <div id="splash" class="splash">
+    <img src="assets/SNUX.png" alt="Snux logo" class="splash-logo" />
+  </div>
+
+  <main id="app" class="app hidden">
+    <!-- Header -->
+    <header class="header">
+      <img src="assets/SNUX.png" alt="Snux logo" class="header-logo" />
+    </header>
+
+    <!-- Landing (pick date) -->
+    <section id="landing" class="card center">
+      <h1>Choose Your Quit Date</h1>
+      <input type="date" id="quitDate" />
+      <button id="startBtn" class="btn">Start Tracking</button>
+    </section>
+
+    <!-- Tracker -->
+    <section id="tracker" class="tracker hidden">
+      <div id="motivation" class="motivation"></div>
+
+      <div class="grid">
+        <button class="tile" data-type="money">
+          <div class="tile-title">Money Saved</div>
+          <div id="moneyVal" class="tile-value">$0.00</div>
+        </button>
+
+        <button class="tile" data-type="cans">
+          <div class="tile-title">Cans Avoided</div>
+          <div id="cansVal" class="tile-value">0</div>
+        </button>
+
+        <button class="tile" data-type="days">
+          <div class="tile-title">Days Free</div>
+          <div id="daysVal" class="tile-value">0</div>
+        </button>
+
+        <button class="tile" data-type="chart">
+          <div class="tile-title">Money Saved Over Time</div>
+          <div class="tile-sub">Tap to view</div>
+        </button>
+
+        <button class="tile" data-type="health">
+          <div class="tile-title">Health Progress</div>
+          <div class="tile-sub">Tap to view</div>
+        </button>
+
+        <button class="tile" data-type="resets">
+          <div class="tile-title">Reset Count</div>
+          <div id="resetsVal" class="tile-value">0</div>
+        </button>
+      </div>
+
+      <button id="resetJourneyBtn" class="btn danger">Restart Journey</button>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content fade-in">
+      <button id="modalClose" class="modal-close" aria-label="Close">&times;</button>
+      <h2 id="modalTitle" class="modal-title"></h2>
+      <div id="modalBody" class="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js').catch(console.warn);
+      });
+    }
+  </script>
+</body>
+</html>
